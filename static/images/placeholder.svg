@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="560" viewBox="0 0 400 560">
+  <rect width="400" height="560" fill="#1a1a26"/>
+  <rect x="140" y="220" width="120" height="120" rx="16" fill="#22222e" stroke="#333344" stroke-width="2"/>
+  <text x="200" y="294" text-anchor="middle" fill="#5555778" font-family="sans-serif" font-size="48">🎮</text>
+  <text x="200" y="380" text-anchor="middle" fill="#44445566" font-family="sans-serif" font-size="13">Imagem não encontrada</text>
+</svg>

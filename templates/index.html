@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Pass Curadoria — Os Melhores Jogos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <nav class="navbar">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">NORDES<strong>TOCAS</strong></span>
+      </div>
+      <div class="nav-badge">
+        <span class="pulse-dot"></span>
+        PC &amp; CONSOLE
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">CURADORIA EXCLUSIVA</div>
+      <h1 class="hero-title">
+        Os Melhores Jogos do
+        <span class="title-main">Game Pass</span>
+      </h1>
+      <a href="#catalogo" class="cta-btn">
+        <span>Ver o Catálogo</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-scroll-hint">ROLE PARA EXPLORAR</div>
+  </header>
+  
+  <!-- STATS BAR 
+  <section class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">500+</span>
+      <span class="stat-label">Jogos no Catálogo</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">Day 1</span>
+      <span class="stat-label">Lançamentos Incluídos</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">☁️ Cloud</span>
+      <span class="stat-label">Jogue em Qualquer Tela</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-number">R$44</span>
+      <span class="stat-label">Por Mês (Ultimate)</span>
+    </div>
+  </section>
+  -->
+  <!-- FEATURED GAMES 
+  <section id="catalogo" class="section featured-section">
+    <div class="section-header">
+      <h2 class="section-title">Em Destaque</h2>
+      <p class="section-desc">Os títulos mais aclamados e jogados agora mesmo</p>
+    </div>
+    <div class="featured-scroll-wrapper">
+      <div class="featured-track" id="featuredTrack">
+        {% for game in data.games if game.featured %}
+        <div class="featured-card" style="--accent: {{ loop.index | accent_color }}">
+          <div class="card-img-wrap">
+            <img
+              src="/static/images/games/{{ game.image }}"
+              onerror="this.src='/static/images/placeholder.svg'"
+              alt="{{ game.title }}"
+              class="card-img"
+            />
+            <div class="card-overlay"></div>
+            {% if game.cloud %}
+            <span class="cloud-badge">☁ CLOUD</span>
+            {% endif %}
+            <div class="meta-score">{{ game.metacritic }}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              {% for tag in game.tags[:2] %}
+              <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <h3 class="card-title">{{ game.title }}</h3>
+            <p class="card-dev">{{ game.developer }}</p>
+            <p class="card-desc">{{ game.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="scroll-btn scroll-left" onclick="scrollTrack('featuredTrack', -1)">‹</button>
+      <button class="scroll-btn scroll-right" onclick="scrollTrack('featuredTrack', 1)">›</button>
+    </div>
+  </section>
+  -->
+  <!-- CATEGORY ROWS -->
+  {% for cat in data.categories %}
+  {% set cat_games = data.games | filterby("category", cat.id) | list %}
+  {% if cat_games %}
+  <section class="section category-section">
+    <div class="section-header">
+      <h2 class="section-title">{{ cat.title }}</h2>
+      <p class="section-desc">{{ cat.description }}</p>
+    </div>
+    <div class="row-scroll-wrapper">
+      <div class="games-row" id="row-{{ cat.id }}">
+        {% for game in cat_games %}
+        <div class="game-card">
+          <div class="game-img-wrap">
+            <img
+              src="/static/images/games/{{ game.image }}"
+              onerror="this.src='/static/images/placeholder.svg'"
+              alt="{{ game.title }}"
+              class="game-img"
+            />
+            {% if game.cloud %}
+            <span class="cloud-mini">☁</span>
+            {% endif %}
+            <div class="game-hover-overlay">
+              <p class="game-desc-hover">{{ game.description }}</p>
+            </div>
+          </div>
+          <div class="game-info">
+            <h4 class="game-title">{{ game.title }}</h4>
+            <span class="game-dev">{{ game.developer }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="row-btn row-left" onclick="scrollTrack('row-{{ cat.id }}', -1)">‹</button>
+      <button class="row-btn row-right" onclick="scrollTrack('row-{{ cat.id }}', 1)">›</button>
+    </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="cta-bg"></div>
+    <div class="cta-content">
+      <div class="cta-eyebrow">PRONTO PARA JOGAR?</div>
+      <h2 class="cta-heading">Adquira sua conta agora<br/><span>e jogue tudo isso hoje</span></h2>
+      <p class="cta-body">Acesso imediato a centenas de jogos.</p>
+      <div class="cta-buttons">
+        <a href="https://www.xbox.com/pt-BR/xbox-game-pass" target="_blank" class="cta-btn cta-btn-primary">
+          Adquirir Agora
+        </a>
+        <a href="https://www.xbox.com/pt-BR/xbox-game-pass/games" target="_blank" class="cta-btn cta-btn-ghost">
+          Ver Catálogo Completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Curadoria não oficial. Todos os jogos são propriedade de seus respectivos detentores.</p>
+    <p>Game Pass é uma marca registrada da Microsoft Corporation.</p>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
