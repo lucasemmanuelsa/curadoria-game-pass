@@ -63,7 +63,7 @@
     </div>
   </section>
   -->
-  <!-- FEATURED GAMES 
+  <!-- FEATURED GAMES -->
   <section id="catalogo" class="section featured-section">
     <div class="section-header">
       <h2 class="section-title">Em Destaque</h2>
@@ -103,7 +103,6 @@
       <button class="scroll-btn scroll-right" onclick="scrollTrack('featuredTrack', 1)">›</button>
     </div>
   </section>
-  -->
   <!-- CATEGORY ROWS -->
   {% for cat in data.categories %}
   {% set cat_games = data.games | filterby("category", cat.id) | list %}
