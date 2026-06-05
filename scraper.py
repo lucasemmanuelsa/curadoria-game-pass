@@ -78,6 +78,7 @@ CATEGORIES_MAP = {
     "esporte": "esporte", "sports": "esporte",
     "indie": "indie",
     "estratégia": "estrategia", "strategy": "estrategia",
+    "simulador": "simulador", "simulator": "simulador", "simulator": "simulator",
 }
 
 def extract_product_id(url: str) -> str | None:
